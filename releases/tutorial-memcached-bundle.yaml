@@ -1,6 +1,8 @@
 ---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
+aliases:
+  tenna/image_tag: &image_tag "v1.2.0"
 metadata:
   name: tutorial-memcached-bundle
   namespace: demo
