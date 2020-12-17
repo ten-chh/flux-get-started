@@ -2,7 +2,7 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 aliases:
-  tenna/image_tag: &image_tag "v1.2.0"
+  tenna/image_tag: &image_tag "latest"
   tenna/rw_env: &rw_env
     - name: NODE_ENV
       value: "production"
@@ -11,12 +11,19 @@ aliases:
     - name: FRONTEND_URL
       value: "https://dv3-kube.nonprod.tenna.com"
 metadata:
-  name: tutorial-memcached-bundle
+  name: test-of-upgrade
   namespace: demo
   annotations:
     tenna/test: "does this hurt"
 spec:
+  helmVersion: v3
+  maxHistory: 20
+  releaseName: test-of-upgrade
   chart:
-    repository: https://stefanprodan.github.io/podinfo
-    name: podinfo
-    version: 3.2.0
+    repository: http://helm.cloud.tenna.com
+    name: test-of-upgrade
+    version: 1.0.5
+  service:
+    image:
+        repository: tutum/hello-world
+        tag: *image_tag
