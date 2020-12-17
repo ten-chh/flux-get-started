@@ -3,6 +3,13 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 aliases:
   tenna/image_tag: &image_tag "v1.2.0"
+  tenna/rw_env: &rw_env
+    - name: NODE_ENV
+      value: "production"
+    - name: DEBUG
+      value: app:middleware:session
+    - name: FRONTEND_URL
+      value: "https://dv3-kube.nonprod.tenna.com"
 metadata:
   name: tutorial-memcached-bundle
   namespace: demo
